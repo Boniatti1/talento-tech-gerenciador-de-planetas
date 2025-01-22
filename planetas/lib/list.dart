@@ -12,7 +12,6 @@ class ListLayout extends StatefulWidget {
 }
 
 class _ListLayoutState extends State<ListLayout> {
-  
   void reloadStateCallback() {
     setState(() {});
   }

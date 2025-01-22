@@ -12,4 +12,14 @@ class Planet {
     required this.distancia,
     required this.diametro,
   });
+
+  Map<String, Object> toMap() {
+    return {
+      "id": id,
+      "nome": nome,
+      "descricao": descricao,
+      "distancia": distancia,
+      "diametro": diametro
+    };
+  }
 }
