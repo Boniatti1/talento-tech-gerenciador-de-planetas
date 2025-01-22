@@ -10,7 +10,6 @@ class PlanetModal extends StatefulWidget {
 }
 
 class _PlanetModalState extends State<PlanetModal> {
-  bool isUpdate = false;
 
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _descricaoController = TextEditingController();
@@ -27,8 +26,19 @@ class _PlanetModalState extends State<PlanetModal> {
       return;
     }
 
+    final planetData = {
+      'nome': nome,
+      'descricao': descricao,
+      'distancia': distancia,
+      'diametro': diametro,
+    };
+
+    print(nome);
+    print(descricao);
+    print(diametro);
+
     Navigator.of(context).pop();
-    widget.newSubmitFunction(nome, descricao, distancia, diametro);
+    widget.newSubmitFunction(planetData);
   }
 
   @override

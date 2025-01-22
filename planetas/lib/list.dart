@@ -2,27 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:planetas/planet.dart';
 import 'modal.dart';
 import 'modalUpdate.dart';
+import 'database.dart';
 
 class ListLayout extends StatefulWidget {
-  ListLayout({required this.planets, super.key});
+  ListLayout({required this.planets, required this.dbInstance, required this.reloadStateCallback, super.key,});
   List<Planet> planets;
+  PlanetDB dbInstance;
+  Function reloadStateCallback;
 
   @override
   State<ListLayout> createState() => _ListLayoutState();
 }
 
 class _ListLayoutState extends State<ListLayout> {
-  void reloadStateCallback() {
-    setState(() {});
-  }
+  // void reloadStateCallback() {
+  //   setState(() {});
+  // }
 
   void _openModalUpdate(Planet planet) {
     showModalBottomSheet(
       context: context,
       builder: (ctx) => PlanetModalUpdate(
-        planet: planet,
-        planetsList: widget.planets,
-        reloadStateCallback: reloadStateCallback,
+        updatePlanet: (planet) async {
+          await widget.dbInstance.updatePlanet(planet);},
+          planet: planet,
+          reloadStateCallback: widget.reloadStateCallback,
       ),
     );
   }

@@ -3,13 +3,13 @@ import 'planet.dart';
 
 class PlanetModalUpdate extends StatefulWidget {
   Planet planet;
-  List<Planet> planetsList;
+  Function updatePlanet;
   Function reloadStateCallback;
 
   PlanetModalUpdate({
     required this.planet,
-    required this.planetsList,
     required this.reloadStateCallback,
+    required this.updatePlanet,
     super.key,
   });
 
@@ -45,28 +45,18 @@ class _PlanetModalUpdateState extends State<PlanetModalUpdate> {
 
     Navigator.of(context).pop();
 
-    setState(
-      () {
-        int index =
-            widget.planetsList.indexWhere((p) => p.id == widget.planet.id);
-        print(index);
-        int id = widget.planet.id!;
-        Planet updatedPlanet = Planet(
-          id: id,
-          nome: nome,
-          descricao: descricao,
-          distancia: distancia,
-          diametro: diametro,
-        );
-        for (var element in widget.planetsList) {
-          print(element.nome);
-        }
-        widget.planetsList[index] = updatedPlanet;
-      },
+    int id = widget.planet.id!;
+    Planet updatedPlanet = Planet(
+      id: id,
+      nome: nome,
+      descricao: descricao,
+      distancia: distancia,
+      diametro: diametro,
     );
 
+    widget.updatePlanet(updatedPlanet);
+
     widget.reloadStateCallback();
-    
   }
 
   @override

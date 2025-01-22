@@ -1,50 +1,53 @@
 import 'dart:async';
 import 'planet.dart';
-import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final database = openDatabase(
-    join(await getDatabasesPath(), 'planetas.db'),
-    onCreate: (db, version) {
-      return db.execute(
-        'CREATE TABLE planetas(id INTEGER PRIMARY KEY, nome TEXT, descricao TEXT, distancia REAL, diametro REAL)',
-      );
-    },
-    version: 1,
-  );
+class PlanetDB {
+  // WidgetsFlutterBinding.ensureInitialized();
+  late final Future<Database> database;
 
-  Future<void> insertPlanet(Planet planet) async {
+  PlanetDB() {
+    database = _initDatabase();
+  }
+
+  Future<Database> _initDatabase() async {
+    return openDatabase(
+      join(await getDatabasesPath(), 'planetas.db'),
+      onCreate: (db, version) {
+        return db.execute(
+          'CREATE TABLE planetas(id INTEGER PRIMARY KEY, nome TEXT, descricao TEXT, distancia REAL, diametro REAL)',
+        );
+      },
+      version: 1,
+    );
+  }
+
+  Future<void> insertPlanet(Map<String, dynamic> planet) async {
     final db = await database;
 
     await db.insert(
       'planetas',
-      planet.toMap(),
+      planet,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+
+    print(await "jksdhkjsahdfddasdasdfsd");
   }
 
   Future<List<Planet>> planets() async {
     final db = await database;
 
-    final List<Map<String, Object?>> planetMaps = await db.query('planetas');
+    final List<Map<String, dynamic>> planetMaps = await db.query('planetas');
 
     return [
-      for (final {
-            'id': id as int,
-            'nome': nome as String,
-            'descricao': descricao as String,
-            'distanca': distancia as double,
-            'diametro': diametro as double,
-          } in planetMaps)
+      for (var planetMap in planetMaps)
         Planet(
-          id: id,
-          nome: nome,
-          descricao: descricao,
-          distancia: distancia,
-          diametro: diametro,
+          id: planetMap['id'],
+          nome: planetMap['nome'],
+          descricao: planetMap['descricao'],
+          distancia: planetMap['distancia'],
+          diametro: planetMap['diametro'],
         ),
     ];
   }

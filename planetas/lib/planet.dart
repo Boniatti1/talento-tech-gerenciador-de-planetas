@@ -1,19 +1,19 @@
 class Planet {
-  int? id;
-  String nome;
-  String descricao;
-  double distancia;
-  double diametro;
+  final int? id;
+  final String nome;
+  final String descricao;
+  final double distancia;
+  final double diametro;
 
   Planet({
-    required this.id,
+    this.id,
     required this.nome,
     required this.descricao,
     required this.distancia,
     required this.diametro,
   });
 
-  Map<String, Object> toMap() {
+  Map<String, dynamic> toMap() {
     return {
       "id": id,
       "nome": nome,
