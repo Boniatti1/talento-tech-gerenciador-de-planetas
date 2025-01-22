@@ -1,52 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:planetas/planet.dart';
-import 'modal.dart';
+import 'package:planetas/models/planet.dart';
 import 'modalUpdate.dart';
-import 'database.dart';
 
 class ListLayout extends StatefulWidget {
-  ListLayout({required this.planets, required this.dbInstance, required this.reloadStateCallback, super.key,});
-  List<Planet> planets;
-  PlanetDB dbInstance;
-  Function reloadStateCallback;
+  const ListLayout({
+    required this.planets,
+    required this.callback,
+    super.key,
+  });
+
+  final List<Planet> planets;
+  final Function callback;
 
   @override
   State<ListLayout> createState() => _ListLayoutState();
 }
 
 class _ListLayoutState extends State<ListLayout> {
-  // void reloadStateCallback() {
-  //   setState(() {});
-  // }
-
-  void _openModalUpdate(Planet planet) {
-    showModalBottomSheet(
-      context: context,
-      builder: (ctx) => PlanetModalUpdate(
-        updatePlanet: (planet) async {
-          await widget.dbInstance.updatePlanet(planet);},
-          planet: planet,
-          reloadStateCallback: widget.reloadStateCallback,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ...widget.planets.map(
-          (planet) => InkWell(
-            onTap: () => _openModalUpdate(planet),
-            child: ListTilePlanet(
-              nome: planet.nome,
-              apelido: planet.descricao,
-              distancia: planet.distancia,
-              diametro: planet.diametro,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ...widget.planets.map(
+            (planet) => InkWell(
+              onTap: () => PlanetModalUpdate.openModalUpdate(
+                  planet: planet, callback: widget.callback, context: context),
+              child: ListTilePlanet(
+                nome: planet.nome,
+                apelido: planet.descricao,
+                distancia: planet.distancia,
+                diametro: planet.diametro,
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

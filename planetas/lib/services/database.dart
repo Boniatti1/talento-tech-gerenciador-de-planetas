@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'planet.dart';
+import '../models/planet.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+
 class PlanetDB {
-  // WidgetsFlutterBinding.ensureInitialized();
   late final Future<Database> database;
 
   PlanetDB() {
@@ -31,8 +31,6 @@ class PlanetDB {
       planet,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-
-    print(await "jksdhkjsahdfddasdasdfsd");
   }
 
   Future<List<Planet>> planets() async {

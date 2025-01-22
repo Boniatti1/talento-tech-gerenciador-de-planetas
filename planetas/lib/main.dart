@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app.dart';
-
-
+import 'screens/app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Lista de Planetas',
       home: const HomePage(),
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
     );
   }
