@@ -85,7 +85,7 @@ class _PlanetModalState extends State<PlanetModal> {
             padding: const EdgeInsets.all(20.0),
             child: TextFormField(
               controller: _distanciaController,
-              decoration: InputDecoration(labelText: 'Distância da Terra em U.A.'),
+              decoration: InputDecoration(labelText: 'Distância do Sol em U.A.'),
               keyboardType: TextInputType.numberWithOptions(decimal: true),
             ),
           ),

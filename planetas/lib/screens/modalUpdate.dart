@@ -141,7 +141,7 @@ class _PlanetModalUpdateState extends State<PlanetModalUpdate> {
               child: TextFormField(
                 controller: _distanciaController,
                 decoration:
-                    InputDecoration(labelText: 'Distância da Terra em U.A.'),
+                    InputDecoration(labelText: 'Distância do Sol em U.A.'),
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
               ),
             ),
