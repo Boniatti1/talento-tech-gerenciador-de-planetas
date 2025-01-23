@@ -21,6 +21,7 @@ class _ListLayoutState extends State<ListLayout> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        spacing: 5,
         children: [
           ...widget.planets.map(
             (planet) => InkWell(
@@ -57,7 +58,7 @@ class ListTilePlanet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(99, 58, 49, 49),
+      color: const Color.fromARGB(90, 0, 0, 0),
       margin: EdgeInsets.all(2),
       child: Row(
         children: [
@@ -69,7 +70,9 @@ class ListTilePlanet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: const Color.fromARGB(255, 192, 192, 192)),
                     nome,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -98,14 +101,18 @@ class ListTilePlanet extends StatelessWidget {
                 children: [
                   Text(
                     "$distancia U.A.",
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: const Color.fromARGB(211, 181, 201, 243)),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     "$diametro km",
-                    style: TextStyle(fontSize: 16),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                    style: TextStyle(
+                        fontSize: 16,
+                        overflow: TextOverflow.ellipsis,
+                        color: const Color.fromARGB(186, 189, 186, 219)),
+                  )
                 ],
               ),
             ),

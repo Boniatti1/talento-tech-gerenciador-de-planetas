@@ -27,24 +27,29 @@ class _AppState extends State<App> {
       appBar: AppBar(
         title: Text("Lista de Planetas"),
         centerTitle: true,
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       // Constrói a lista com base no estado da operação de busca na base de dados
-      body: FutureBuilder<List<Planet>>(
-        future: planets,
-        builder: (ctx, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data!.isEmpty) {
-              return Center(child: Text("Nenhum planeta encontrado"));
+      body: Container(
+        decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/fundo.jpg"), fit: BoxFit.cover)),
+        child: FutureBuilder<List<Planet>>(
+          future: planets,
+          builder: (ctx, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data!.isEmpty) {
+                return Center(child: Text("Nenhum planeta encontrado"));
+              } else {
+                return ListLayout(
+                  planets: snapshot.data!,
+                  callback: loadPlanets,
+                );
+              }
             } else {
-              return ListLayout(
-                planets: snapshot.data!,
-                callback: loadPlanets,
-              );
+              return Center(child: CircularProgressIndicator());
             }
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
+          },
+        ),
       ),
       // Botão flutuante para modal de inserção de planetas
       floatingActionButton: FloatingActionButton(

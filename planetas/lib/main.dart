@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'screens/app.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: ThemeData.dark().primaryColor, // Cor da barra de navegação
+    systemNavigationBarIconBrightness: Brightness.dark,
+  ));
 }
 
 class MyApp extends StatelessWidget {
